@@ -8,6 +8,8 @@ const postBlog = async (req, res) => {
     try {
         const {title, content} = await req.body;
 
+        
+
         const newPost = await Post({
             title,
             content

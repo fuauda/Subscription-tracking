@@ -1,6 +1,7 @@
 const express= require("express");
 const blogRouter = require("./routes/blogRoute");
-const userRouter = require("./routes/userRoute")
+const userRouter = require("./routes/userRoute");
+const authRouter = require("./routes/authRoute")
 const connectDB = require("./config/db");
 
 const app = express();
@@ -12,6 +13,7 @@ connectDB();
 
 app.use(express.json());
 
+app.use('/auth', authRouter)
 app.use('/blog', blogRouter)
 app.use('/users', userRouter)
 

@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Password is required'],
     minlength: [6, 'Password must be at least 6 characters long'],
-    select: false,
+    // select: false,
   },
   role: { // Example for basic access control (e.g., 'user', 'admin')
     type: String,
