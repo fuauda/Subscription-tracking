@@ -1,4 +1,5 @@
 const Post = require("../models/Blog");
+const User = require("../models/User");
 
 const getBlog = (req, res) => {
     res.send("blog")
@@ -6,13 +7,20 @@ const getBlog = (req, res) => {
 
 const postBlog = async (req, res) => {
     try {
-        const {title, content} = await req.body;
+        const {title, content, author,} = await req.body;
 
-        
+        const user = User.find({ _id: author })
+
+        if(!user){
+            res.status(404).json({ message: "user not found"});
+        }
+
+
 
         const newPost = await Post({
             title,
-            content
+            content,
+            author
         })
 
         const savedPost = await newPost.save()
