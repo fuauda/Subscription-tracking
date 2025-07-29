@@ -12,7 +12,6 @@ const postSchema = new mongoose.Schema({
   content: {
     type: String,
     required: [true, 'Post content is required'],
-    minlength: [50, 'Content must be at least 50 characters long'],
   },
   author: {
     type: mongoose.Schema.Types.ObjectId, // References the User model
