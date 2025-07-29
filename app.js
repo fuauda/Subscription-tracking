@@ -1,5 +1,6 @@
 const express= require("express");
 const blogRouter = require("./routes/blogRoute");
+const userRouter = require("./routes/userRoute")
 const connectDB = require("./config/db");
 
 const app = express();
@@ -11,6 +12,7 @@ connectDB();
 
 
 app.use('/blog', blogRouter)
+app.use('/users', userRouter)
 
 app.get('/', (req, res) => {
     res.send('Welcome to the Insa Summer CAMP!');
