@@ -3,7 +3,7 @@ require('dotenv').config(); // Load environment variables
 
 const connectDB = async () => {
   try {
-    const MONGODB_URI = process.env.MONGO_URI;
+    const MONGODB_URI = process.env.MONGODB_URI;
 
     if (!MONGODB_URI) {
       console.error('MongoDB connection string (MONGO_URI) not found in .env file.');
