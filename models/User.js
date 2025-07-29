@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require("bcryptjs")
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -21,6 +22,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Password is required'],
     minlength: [6, 'Password must be at least 6 characters long'],
+    select: false,
   },
   role: { // Example for basic access control (e.g., 'user', 'admin')
     type: String,
@@ -29,6 +31,21 @@ const userSchema = new mongoose.Schema({
   },
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps automatically
+});
+
+// Mongoose pre-save hook: Hash password before saving the user document
+userSchema.pre('save', async function(next) {
+  // Only run this function if password was actually modified (or is new)
+  if (!this.isModified('password')) {
+    return next();
+  }
+
+  // Generate a salt (recommended: 10 to 12 rounds for good balance of security and performance)
+  const salt = await bcrypt.genSalt(10); // 10 is the default work factor
+
+  // Hash the password with the generated salt
+  this.password = await bcrypt.hash(this.password, salt);
+  next(); // Continue with the save operation
 });
 
 

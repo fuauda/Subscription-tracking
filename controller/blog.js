@@ -1,4 +1,3 @@
-const connectDB = require("../config/db");
 const Post = require("../models/Blog");
 
 const getBlog = (req, res) => {
@@ -7,9 +6,7 @@ const getBlog = (req, res) => {
 
 const postBlog = async (req, res) => {
     try {
-        await connectDB();
-
-        const {title, content} = req.body;
+        const {title, content} = await req.body;
 
         const newPost = await Post({
             title,

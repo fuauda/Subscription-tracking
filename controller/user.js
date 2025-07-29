@@ -1,4 +1,3 @@
-const connectDB = require("../config/db");
 const User = require("../models/User");
 
 
@@ -8,13 +7,13 @@ const test = async (req, res) => {
 
 const addUser = async (req, res) => {
     try{
-        await connectDB();
+        const {username, password, role} = await req.body;
 
-        const { username, password } = await req.body();
 
         const newUser = await User({
             username,
-            password
+            password,
+            role
         })
 
         const savedUser = await newUser.save()

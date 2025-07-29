@@ -7,9 +7,10 @@ const app = express();
 const PORT = process.env.PORT || 3000; // Define PORT with a default value
 
 
+
 connectDB();
 
-
+app.use(express.json());
 
 app.use('/blog', blogRouter)
 app.use('/users', userRouter)
